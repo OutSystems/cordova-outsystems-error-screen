@@ -3,18 +3,14 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="cordova-plugin-error-screen"
     version="1.0.0">
-    <name>Error Screen</name>
+    <name>ErrorScreen</name>
     <description>Cordova Error Screen Plugin</description>
     <license>OutSystems</license>
-    <keywords>cordova, error, screen</keywords>
+    <keywords>cordova,error,screen</keywords>
     <repo>https://github.com/OutSystems/cordova-plugin-error-screen.git</repo>
     <issue>https://github.com/OutSystems/cordova-plugin-error-screen/issues</issue>
 
-    <engines>
-        <engine name="cordova" version=">=3.0.0" />
-    </engines>
-
-    <js-module src="www/ErrorScreen.js" name="ErrorScreen">
+    <js-module src="www/errorscreen.js" name="ErrorScreen">
         <clobbers target="navigator.errorscreen" />
     </js-module>
 
@@ -22,23 +18,23 @@
     <platform name="android">
       <config-file target="res/xml/config.xml" parent="/*">
         <feature name="ErrorScreen">
-          <param name="android-package" value="com.outsystems.plugins.errorscreen.ErrorScreen" />
+          <param name="android-package" value="org.apache.cordova.errorscreen.ErrorScreen" />
           <param name="onload" value="true" />
         </feature>
       </config-file>
-
-      <source-file src="src/android/com/outsystems/ErrorScreen.java" target-dir="src/com/outsystems/plugins/errorscreen" />
-      <resource-file src="res/android/layout/network_error.xml" target-dir="res/layout/network_error.xml" />
-      <resource-file src="res/android/drawable/button_background.xml" target-dir="res/drawable/button_background.xml" />
-      <resource-file src="res/android/drawable/button_text_selector.xml" target-dir="res/drawable/button_text_selector.xml" />
-      <resource-file src="res/android/drawable-mdpi/offline.png" target-dir="res/drawable-mdpi/offline.png" />
-      <resource-file src="res/android/drawable-hdpi/offline.png" target-dir="res/drawable-hdpi/offline.png" />
-      <resource-file src="res/android/drawable-xhdpi/offline.png" target-dir="res/drawable-xhdpi/offline.png" />
-      <resource-file src="res/android/drawable-xxhdpi/offline.png" target-dir="res/drawable-xxhdpi/offline.png" />
-      <resource-file src="res/android/drawable-xxxhdpi/offline.png" target-dir="res/drawable-xxxhdpi/offline.png" />
-      <resource-file src="res/android/values/ErrorScreenColors.xml" target-dir="res/values/ErrorScreenColors.xml" />
-      <resource-file src="res/android/values/ErrorScreenDimens.xml" target-dir="res/values/ErrorScreenDimens.xml" />
-      <resource-file src="res/android/values/ErrorScreenStrings.xml" target-dir="res/values/ErrorScreenStrings.xml" />
-      <resource-file src="res/android/values/ErrorScreenStyles.xml" target-dir="res/values/ErrorScreenStyles.xml" />
+      
+      <source-file src="src/android/ErrorScreen.java" target-dir="src/org/apache/cordova/errorscreen" />
+      <resource-file src="res/android/layout/network_error.xml" target="res/layout/network_error.xml" />
+      <resource-file src="res/android/drawable/button_background.xml" target="res/drawable/button_background.xml" />
+      <resource-file src="res/android/drawable/button_text_selector.xml" target="res/drawable/button_text_selector.xml" />
+      <resource-file src="res/android/drawable-mdpi/offline.png" target="res/drawable-mdpi/offline.png" />
+      <resource-file src="res/android/drawable-hdpi/offline.png" target="res/drawable-hdpi/offline.png" />
+      <resource-file src="res/android/drawable-xhdpi/offline.png" target="res/drawable-xhdpi/offline.png" />
+      <resource-file src="res/android/drawable-xxhdpi/offline.png" target="res/drawable-xxhdpi/offline.png" />
+      <resource-file src="res/android/drawable-xxxhdpi/offline.png" target="res/drawable-xxxhdpi/offline.png" />
+      <resource-file src="res/android/values/ErrorScreenColors.xml" target="res/values/ErrorScreenColors.xml" />
+      <resource-file src="res/android/values/ErrorScreenDimens.xml" target="res/values/ErrorScreenDimens.xml" />
+      <resource-file src="res/android/values/ErrorScreenStrings.xml" target="res/values/ErrorScreenStrings.xml" />
+      <resource-file src="res/android/values/ErrorScreenStyles.xml" target="res/values/ErrorScreenStyles.xml" />
     </platform>
 </plugin>

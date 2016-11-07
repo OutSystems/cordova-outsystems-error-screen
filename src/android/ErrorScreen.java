@@ -13,8 +13,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.util.Log;
-
-import java.util.Date;
+import android.app.Dialog;
+import android.view.View;
+import android.widget.Button;
+import android.content.Context;
 
 public class ErrorScreen extends CordovaPlugin {
   private static final String TAG = "ErrorScreen";
@@ -28,7 +30,6 @@ public class ErrorScreen extends CordovaPlugin {
     super.initialize(cordova, webView);
 
     orientation = cordova.getActivity().getResources().getConfiguration().orientation;
-    backgroundColor = preferences.getInteger("backgroundColor", "#FFFFFF");
 
     Log.d(TAG, "Initializing ErrorScreen Plugin");
   }
@@ -73,13 +74,12 @@ public class ErrorScreen extends CordovaPlugin {
 
     cordova.getActivity().runOnUiThread(new Runnable() {
       public void run() {
-
-        screenDialog = new Dialog(webView.getContext();, android.R.style.Theme_Translucent_NoTitleBar);
-        screenDialog.setContentView(R.layout.network_error);
+        screenDialog = new Dialog(webView.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
+        screenDialog.setContentView(android.R.layout.network_error);
         screenDialog.setCancelable(false);
         screenDialog.show();
         
-        Button button_try_again = (Button) screenDialog.findViewById(R.id.networkErrorButtonRetry);
+        Button button_try_again = (Button) screenDialog.findViewById(android.R.id.networkErrorButtonRetry);
         button_try_again.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -94,7 +94,7 @@ public class ErrorScreen extends CordovaPlugin {
   @SuppressWarnings("deprecation")
   private void hideErrorScreen() {
     // If the splash dialog is showing don't try to show it again
-    if (splashDialog == null && !screenDialog.isShowing()) {
+    if (screenDialog == null && !screenDialog.isShowing()) {
       return;
     }
 
