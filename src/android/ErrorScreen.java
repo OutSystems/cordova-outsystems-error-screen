@@ -1,6 +1,4 @@
-/**
- */
-package com.example;
+package org.apache.cordova.errorscreen;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -54,7 +52,7 @@ public class ErrorScreen extends CordovaPlugin {
 
   @Override
   public Object onMessage(String id, Object data) {
-    if ("errormessage".equals(id)) {
+    if ("errorscreen".equals(id)) {
       if ("show".equals(data.toString())) {
         this.showErrorScreen();
       } else if ("hide".equals(data.toString())) {
@@ -74,12 +72,17 @@ public class ErrorScreen extends CordovaPlugin {
 
     cordova.getActivity().runOnUiThread(new Runnable() {
       public void run() {
-        screenDialog = new Dialog(webView.getContext(), android.R.style.Theme_Translucent_NoTitleBar);
-        screenDialog.setContentView(android.R.layout.network_error);
+        Context context = webView.getContext();
+
+        int network_error_layout = context.getResources().getIdentifier("network_error","layout", context.getPackageName());
+        int networkErrorButtonRetry_button = context.getResources().getIdentifier("networkErrorButtonRetry","id", context.getPackageName());
+
+        screenDialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar);
+        screenDialog.setContentView(network_error_layout);
         screenDialog.setCancelable(false);
         screenDialog.show();
         
-        Button button_try_again = (Button) screenDialog.findViewById(android.R.id.networkErrorButtonRetry);
+        Button button_try_again = (Button) screenDialog.findViewById(networkErrorButtonRetry_button);
         button_try_again.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
