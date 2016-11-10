@@ -1,8 +1,8 @@
 #import <Cordova/CDVPlugin.h>
 #import "ConnectionFailedViewController.h"
 
-@interface CDVErrorScreen : CDVPlugin {
-  ConnectionFailedViewController* connectionFailedVC;
+@interface CDVErrorScreen : CDVPlugin<ConnectionFailedScreenDelegate> {
+  ConnectionFailedViewController* _connectionFailedVC;
 }
 
 - (void)show:(CDVInvokedUrlCommand*)command;

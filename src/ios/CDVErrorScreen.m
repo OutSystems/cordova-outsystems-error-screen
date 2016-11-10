@@ -8,17 +8,18 @@
 }
 
 - (void)show:(CDVInvokedUrlCommand *)command {
-  [self addChildViewController:_connectionFailedVC];
-  [self willMoveToParentViewController:_connectionFailedVC];
+  [self.viewController addChildViewController:_connectionFailedVC];
+  [self.viewController willMoveToParentViewController:_connectionFailedVC];
 
-  _connectionFailedVC.view.frame = [self.view bounds];
+  _connectionFailedVC.view.frame = [self.viewController.view bounds];
   _connectionFailedVC.delegate = self;
 
-  [self.view addSubview:_connectionFailedVC.view];
+  [self.viewController.view addSubview:_connectionFailedVC.view];
 }
 
 - (void)hide:(CDVInvokedUrlCommand *)command {
-  [super didReceiveMemoryWarning];
+    [self.viewController removeFromParentViewController];
+    [self.viewController.view removeFromSuperview];
 }
 
 @end
