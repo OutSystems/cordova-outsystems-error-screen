@@ -4,15 +4,11 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.PluginResult.Status;
-import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.app.Dialog;
 import android.view.View;
 import android.widget.Button;
@@ -20,21 +16,20 @@ import android.content.Context;
 import android.widget.LinearLayout;
 
 public class ErrorScreen extends CordovaPlugin {
-  private static final String TAG = "ErrorScreen";
   private static final String DEFAULT_COLOR = "#C20000";
+  private static final String HEX_REGEX = "^#([A-Fa-f0-9]{6})$";
 
   private static Dialog screenDialog;
   private String backgroundColor;
-  private int orientation;
-
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
 
-    orientation = cordova.getActivity().getResources().getConfiguration().orientation;
     backgroundColor = preferences.getString("BackgroundColor", DEFAULT_COLOR);
 
-    Log.d(TAG, "Initializing ErrorScreen Plugin");
+    if(!backgroundColor.matches(HEX_REGEX)){
+      backgroundColor = DEFAULT_COLOR;
+    }
   }
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
