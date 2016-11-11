@@ -7,7 +7,6 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.app.Dialog;
 import android.view.View;
@@ -91,13 +90,10 @@ public class ErrorScreen extends CordovaPlugin {
         button_try_again.setOnClickListener(new View.OnClickListener(){
           @Override
           public void onClick(View v) {
-            Intent intent = cordova.getActivity().getIntent();
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            webView.loadUrl("javascript:window.location.reload( true )");
 
-            cordova.getActivity().finish();
-            cordova.getActivity().startActivity(intent);
-
-            cordova.getActivity().overridePendingTransition(0,0);
+            screenDialog.dismiss();
+            screenDialog = null;
           }
         });
 
