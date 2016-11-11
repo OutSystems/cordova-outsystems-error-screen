@@ -2,12 +2,22 @@
 #import "ConnectionFailedViewController.h"
 
 #define DEFAULT_COLOR @"#C20000"
+#define HEX_REGEX @"^#([A-Fa-f0-9]{6})$"
 
 @implementation CDVErrorScreen
 
 - (void)pluginInitialize {
+    NSDictionary* settings = [self.commandDelegate settings];
+
     _connectionFailedVC = [[ConnectionFailedViewController alloc] init];
-    backgroundColor = DEFAULT_COLOR;
+    backgroundColor = [settings objectForKey:@"backgroundcolor"];
+
+    NSError* error = nil;
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:HEX_REGEX options:NSRegularExpressionCaseInsensitive error:&error];
+
+    if(backgroundColor == nil || [regex numberOfMatchesInString:backgroundColor options:0 range:NSMakeRange(0, [backgroundColor length])] == 0){
+        backgroundColor = DEFAULT_COLOR;
+    }
 }
 
 - (void)show:(CDVInvokedUrlCommand *)command {
@@ -15,16 +25,15 @@
     [self.viewController willMoveToParentViewController:_connectionFailedVC];
 
     _connectionFailedVC.view.frame = [self.viewController.view bounds];
-    _connectionFailedVC.delegate = self;
-
     _connectionFailedVC.view.backgroundColor = [CDVErrorScreen colorFromHexString:backgroundColor];
+    _connectionFailedVC.delegate = self;
 
     [self.viewController.view addSubview:_connectionFailedVC.view];
 }
 
 - (void)hide:(CDVInvokedUrlCommand *)command {
-    [self.viewController removeFromParentViewController];
-    [self.viewController.view removeFromSuperview];
+    [_connectionFailedVC removeFromParentViewController];
+    [_connectionFailedVC.view removeFromSuperview];
 }
 
 + (UIColor *)colorFromHexString:(NSString *)hexString {
