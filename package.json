@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-error-screen",
+  "name": "com.outsystems.plugins.errorscreen",
   "version": "1.0.0",
   "description": "Cordova Error Screen Plugin",
   "cordova": {
-    "id": "cordova-plugin-error-screen",
+    "id": "com.outsystems.plugins.errorscreen",
     "platforms": [
       "android",
       "ios"

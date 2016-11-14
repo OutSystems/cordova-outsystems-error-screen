@@ -1,4 +1,4 @@
-package org.apache.cordova.errorscreen;
+package com.outsystems.plugins.errorscreen;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -73,24 +73,24 @@ public class ErrorScreen extends CordovaPlugin {
       public void run() {
         Context context = webView.getContext();
 
-        int network_error_layout = context.getResources().getIdentifier("network_error","layout", context.getPackageName());
-        int networkErrorButtonRetry_button = context.getResources().getIdentifier("networkErrorButtonRetry","id", context.getPackageName());
-        int networkErrorLayout_linear_layout = context.getResources().getIdentifier("networkErrorLayout","id", context.getPackageName());
+        int errorscreenLayout = context.getResources().getIdentifier("errorscreen","layout", context.getPackageName());
+        int errorScreenButtonRetry = context.getResources().getIdentifier("errorScreenButtonRetry","id", context.getPackageName());
+        int errorScreenLinearLayout = context.getResources().getIdentifier("errorScreenLinearLayout","id", context.getPackageName());
 
         screenDialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar);
-        screenDialog.setContentView(network_error_layout);
+        screenDialog.setContentView(errorscreenLayout);
         screenDialog.setCancelable(false);
 
         if(backgroundColor != null){
-          LinearLayout error_layout = (LinearLayout) screenDialog.findViewById(networkErrorLayout_linear_layout);
+          LinearLayout error_layout = (LinearLayout) screenDialog.findViewById(errorScreenLinearLayout);
           error_layout.setBackgroundColor(Color.parseColor(backgroundColor));
         }
 
-        Button button_try_again = (Button) screenDialog.findViewById(networkErrorButtonRetry_button);
+        Button button_try_again = (Button) screenDialog.findViewById(errorScreenButtonRetry);
         button_try_again.setOnClickListener(new View.OnClickListener(){
           @Override
           public void onClick(View v) {
-            webView.loadUrl("javascript:window.location.reload( true )");
+            webView.loadUrl("javascript:window.location.reload(true)");
 
             screenDialog.dismiss();
             screenDialog = null;
