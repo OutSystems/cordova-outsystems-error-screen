@@ -36,6 +36,10 @@
     [_connectionFailedVC.view removeFromSuperview];
 }
 
+- (void)onConnectionFailedTryAgainItemTouched{
+    [self.webViewEngine evaluateJavaScript:@"window.location.reload(true)" completionHandler:^(id result, NSError *error) {}];
+}
+
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];

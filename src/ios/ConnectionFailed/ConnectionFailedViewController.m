@@ -30,6 +30,8 @@
 - (IBAction)onTryAgainTouched:(id)sender {
     [self removeFromParentViewController];
     [self.view removeFromSuperview];
+
+    [_delegate onConnectionFailedTryAgainItemTouched];
 }
 
 @end
